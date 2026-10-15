@@ -51,8 +51,8 @@ Run with Docker
 cd backend
 node index.js
 
- live : `http://localhost:3000`
-Frontend: `http://localhost:3000` or open `frontend/index.html`
+ live : `http://127.0.0.1:5500/frontend/`
+Frontend: `http://127.0.0.1:5500/frontend/` 
 
 
 ⚡️⚡️API Endpoints
