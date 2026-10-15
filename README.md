@@ -1,4 +1,4 @@
-# MoMo-Backend 💸 | Enterprise Mobile Money API Platform
+# MoMo-Backend and Frontend| Enterprise Mobile Money API Platform
 
 **The #1 Backend Infrastructure for Mobile Money Businesses in Africa.**
 
@@ -15,7 +15,7 @@ Built for Uganda. Ready for Africa.
 
  ** ⚡️Real-Time Transaction⚡️** - Automatically MoMo SMS
  ** Smart Search & Filters** - By date, type, amount, phone number, status
- **REST API** - Clean, documented API - frontend ready
+ **REST API** - Clean, API - frontend ready
  **🐳 Docker -`docker-compose up` and you are live in  minutes
  **📱 Frontend Included frontend/index.html dashboard
 
@@ -53,6 +53,7 @@ node index.js
 
  live : `http://localhost:3000`
 Frontend: `http://localhost:3000` or open `frontend/index.html`
+
 
 ⚡️⚡️API Endpoints
 
