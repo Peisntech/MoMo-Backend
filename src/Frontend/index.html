@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoMo Pay - Uganda</title>
+  <style>
+    body { font-family: sans-serif; max-width:400px; margin:50px auto; }
+    input, button { width:100%; padding:12px; margin:8px 0; }
+    button { background:#FFCC00; border:none; font-weight:bold; cursor:pointer; }
+    #status { margin-top:20px; padding:15px; background:#f0f0f0; }
+  </style>
+</head>
+<body>
+  <h2>Pay with MTN MoMo</h2>
+  <input id="phone" placeholder="MTN Number e.g. 0771234567" />
+  <input id="amount" placeholder="Amount e.g. 5000" type="number"/>
+  <button onclick="pay()">Pay Now</button>
+  <div id="status">Ready</div>
+
+<script>
+  const API = `http://${window.location.hostname}:3000`;
+
+  async function pay(){
+    const phone = document.getElementById('phone').value;
+    const amount = document.getElementById('amount').value;
+    document.getElementById('status').innerText = "Processing...";
+    
+    try {
+      const res = await fetch(`${API}/pay`, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ phone, amount })
+      });
+      const data = await res.json();
+      document.getElementById('status').innerText = JSON.stringify(data, null, 2);
+      
+      // Check transactions after 2 sec
+      setTimeout(checkTransactions, 2000);
+    } catch(e){
+      document.getElementById('status').innerText = "Connect " + e;
+    }
+  }
+
+  async function checkTransactions(){
+    const res = await fetch(`${API}/transactions`);
+    const data = await res.json();
+    console.log(data);
+  }
+</script>
+</body>
+</html>
