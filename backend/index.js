@@ -10,8 +10,8 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.get("/", async (req, res) => {
   try {
