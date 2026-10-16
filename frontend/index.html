@@ -1,91 +1,251 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>MoMo Pro Dashboard</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #FFF8E1; padding: 20px; }
-    header { background: #FFC107; padding: 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    header h1 { color: #000; }
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
-    .card { background: white; padding: 20px; border-radius: 12px; border-left: 5px solid #FFC107; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
-    .card h3 { font-size: 14px; color: #666; }
-    .card h2 { font-size: 24px; margin-top: 5px; }
-    .controls { display: flex; gap: 10px; margin-bottom: 15px; }
-    input, select { padding: 12px; border-radius: 8px; border: 1px solid #ddd; flex: 1; }
-    table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-collapse: collapse; }
-    th { background: #000; color: #FFC107; padding: 14px; text-align: left; }
-    td { padding: 12px; border-bottom: 1px solid #eee; }
-    .badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-    .SUCCESS { background: #E8F5E9; color: #2E7D32; }
-    .FAILED { background: #FFEBEE; color: #C62828; }
-    .PENDING { background: #FFF8E1; color: #FF8F00; }
-    button { background: #FFC107; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #FFF8E1;
+      padding: 20px;
+    }
+
+    header {
+      background: #FFC107;
+      padding: 20px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      color: #000;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 5px solid #FFC107;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h3 {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      margin-top: 5px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input,
+    select {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      flex: 1;
+    }
+
+    table {
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #000;
+      color: #FFC107;
+      padding: 14px;
+      text-align: left;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .SUCCESS {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .FAILED {
+      background: #FFEBEE;
+      color: #C62828;
+    }
+
+    .PENDING {
+      background: #FFF8E1;
+      color: #FF8F00;
+    }
+
+    button {
+      background: #FFC107;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>💰 MoMo Dashboard PRO</h1>
-  <div><span id="liveDot" style="color:green">● LIVE</span> <button onclick="load()">Refresh</button></div>
-</header>
+  <header>
+    <h1>💰 MoMo Dashboard PRO</h1>
+    <div><span id="liveDot" style="color:green">● LIVE</span> <button onclick="load()">Refresh</button></div>
+  </header>
 
-<div class="stats">
-  <div class="card"><h3>Total Transactions</h3><h2 id="count">0</h2></div>
-  <div class="card"><h3>Total Volume</h3><h2 id="amount">0 UGX</h2></div>
-  <div class="card"><h3>Successful</h3><h2 id="success" style="color:green">0</h2></div>
-  <div class="card"><h3>Failed</h3><h2 id="failed" style="color:red">0</h2></div>
-</div>
+  <div class="stats">
+    <div class="card">
+      <h3>Total Transactions</h3>
+      <h2 id="count">0</h2>
+    </div>
+    <div class="card">
+      <h3>Total Volume</h3>
+      <h2 id="amount">0 UGX</h2>
+    </div>
+    <div class="card">
+      <h3>Successful</h3>
+      <h2 id="success" style="color:green">0</h2>
+    </div>
+    <div class="card">
+      <h3>Failed</h3>
+      <h2 id="failed" style="color:red">0</h2>
+    </div>
+  </div>
+  <!-- ADD NUMBER FORM - START -->
+  <div
+    style="background:white; padding:16px; border-radius:12px; margin-bottom:15px; border:2px solid #FFC107; display:flex; gap:10px; flex-wrap:wrap;">
+    <input id="phoneInput" placeholder="Phone e.g. 0781234567"
+      style="flex:2; padding:12px; border:1px solid #ddd; border-radius:6px;">
+    <input id="amountInput" type="number" placeholder="Amount e.g. 50000"
+      style="flex:1; padding:12px; border:1px solid #ddd; border-radius:6px;">
+    <button onclick="addTx()" style="background:#FFC107; padding:12px 20px;">Send Transaction</button>
+  </div>
 
-<div class="controls">
-  <input id="search" placeholder="🔍 Search phone...">
-  <select id="filterStatus" onchange="applyFilters()">
-    <option value="">All Status</option>
-    <option value="SUCCESS">Success</option>
-    <option value="FAILED">Failed</option>
-    <option value="PENDING">Pending</option>
-  </select>
-</div>
-
-<table>
-  <thead><tr><th>Phone</th><th>Amount</th><th>Status</th><th>Fee</th><th>Date</th></tr></thead>
-  <tbody id="tbody"><tr><td colspan="5">Loading...</td></tr></tbody>
-</table>
-
-<script>
-  const API_URL = "http://localhost:3000/transactions";
-  let allData = [];
-
-  async function load() {
-    try {
-      const res = await fetch(API_URL);
-      allData = await res.json();
-      applyFilters();
-    } catch (e) {
-      document.getElementById("tbody").innerHTML = `<tr><td colspan="5">Error: ${e.message} - Add /transactions route + npm install cors</td></tr>`;
+  <script>
+    async function addTx() {
+      const phone = document.getElementById('phoneInput').value;
+      const amount = document.getElementById('amountInput').value;
+      if (!phone || !amount) return alert('Fill phone and amount');
+      try {
+        const res = await fetch('http://localhost:3000/pay', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone, amount: Number(amount) })
+        });
+        const data = await res.json();
+        console.log('RESPONSE:', data);
+        if (!res.ok) throw new Error(JSON.stringify(data));
+        alert('Added: ' + phone);
+        location.reload();
+      } catch (err) {
+        console.error(err);
+        alert('FAILED: backend not running on 3000 or endpoint is /api/transactions - check console (F12)');
+      }
     }
-  }
+  </script>
+  /*NUMBER FORM - END -->*/
+  <div class="controls">
+    <input id="search" placeholder="🔍 Search phone...">
+    <select id="filterStatus" onchange="applyFilters()">
+      <option value="">All Status</option>
+      <option value="SUCCESS">Success</option>
+      <option value="FAILED">Failed</option>
+      <option value="PENDING">Pending</option>
+    </select>
+  </div>
 
-  function applyFilters() {
-    const search = document.getElementById("search").value.toLowerCase();
-    const status = document.getElementById("filterStatus").value;
-    let filtered = allData.filter(t => {
-      const phone = String(t.phone || '').toLowerCase();
-      const matchPhone = phone.includes(search);
-      const matchStatus = status ? (t.status === status) : true;
-      return matchPhone && matchStatus;
-    });
-    show(filtered);
-  }
+  <table>
+    <thead>
+      <tr>
+        <th>Phone</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Fee</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <tr>
+        <td colspan="5">Loading...</td>
+      </tr>
+    </tbody>
+  </table>
 
-  function show(data) {
-    document.getElementById("count").innerText = data.length;
-    document.getElementById("amount").innerText = data.reduce((s,t)=>s+Number(t.amount||0),0).toLocaleString()+" UGX";
-    document.getElementById("success").innerText = data.filter(d=>d.status==='SUCCESS' || d.status==='PENDING' && false || d.status==='COMPLETED').length;
-    document.getElementById("failed").innerText = data.filter(d=>d.status==='FAILED').length;
-    
-    const tbody = document.getElementById("tbody");
-    tbody.innerHTML = data.map(t => `
+  <script>
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000/transactions'
+      : '/api/transactions'; // for Vercel / Docker
+
+    let allData = [];
+
+    async function load() {
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error(`HTTP ${res.status} - backend not running`);
+        allData = await res.json();
+        applyFilters();
+      } catch (e) {
+        document.getElementById("tbody").innerHTML = `<tr><td colspan="5">Error: ${e.message} - Make sure backend is running on port 3000 + cors enabled</td></tr>`;
+      }
+    }
+
+    function applyFilters() {
+      const search = document.getElementById("search").value.toLowerCase();
+      const status = document.getElementById("filterStatus").value;
+      let filtered = allData.filter(t => {
+        const phone = String(t.phone || '').toLowerCase();
+        const matchPhone = phone.includes(search);
+        const matchStatus = status ? (t.status === status) : true;
+        return matchPhone && matchStatus;
+      });
+      show(filtered);
+    }
+
+    function show(data) {
+      document.getElementById("count").innerText = data.length;
+      document.getElementById("amount").innerText = data.reduce((s, t) => s + Number(t.amount || 0), 0).toLocaleString() + " UGX";
+      document.getElementById("success").innerText = data.filter(d => d.status === 'SUCCESS' || d.status === 'PENDING' && false || d.status === 'COMPLETED').length;
+      document.getElementById("failed").innerText = data.filter(d => d.status === 'FAILED').length;
+
+      const tbody = document.getElementById("tbody");
+      tbody.innerHTML = data.map(t => `
       <tr>
         <td><b>${t.phone || 'N/A'}</b></td>
         <td>${Number(t.amount).toLocaleString()} UGX</td>
@@ -94,10 +254,11 @@
         <td>${new Date(t.created_at).toLocaleString()}</td>
       </tr>
     `).join('') || `<tr><td colspan="5" style="text-align:center; padding:20px;">No transactions found</td></tr>`;
-  }
+    }
 
-  document.getElementById("search").addEventListener("input", applyFilters);
-  load();
-</script>
+    document.getElementById("search").addEventListener("input", applyFilters);
+    load();
+  </script>
 </body>
+
 </html>
