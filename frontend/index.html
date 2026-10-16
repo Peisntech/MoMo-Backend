@@ -209,10 +209,12 @@
   </table>
 
   <script>
-    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-      ? 'http://localhost:3000/transactions'
-      : '/api/transactions'; // for Vercel / Docker
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000'
+      : 'https://momo-backend-kvsf.onrender.com';
 
+    const API_URL = `${API_BASE}/transactions`;
+    const PAY_URL = `${API_BASE}/pay`;
     let allData = [];
 
     async function load() {
